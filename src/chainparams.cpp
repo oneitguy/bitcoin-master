@@ -109,12 +109,34 @@ public:
         nPruneAfterHeight = 100000;
         m_assumed_blockchain_size = 350;
         m_assumed_chain_state_size = 6;
-
-        genesis = CreateGenesisBlock(1231006505, 2083236893, 0x1d00ffff, 1, 50 * COIN);
+       
+	genesis = CreateGenesisBlock({%MAINNET_GENSIS_UNIX_TIMESTAMP%}, {%MAINNET_GENSIS_NONCE%}, {%MAINNET_GENSIS_NBITS%},{%MAINNET_GENSIS_COIN_AMT%});
         consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock == uint256S("0x000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f"));
-        assert(genesis.hashMerkleRoot == uint256S("0x4a5e1e4baab89f3a32518a88c31bc87f618f76673e2cc77ab2127b7afdeda33b"));
-
+        // consensus.hashGenesisBlock = uint256S("0x00");
+        if (true && (genesis.GetHash() != consensus.hashGenesisBlock)) {
+		std::cout << std::string("Calculating main genesis block...\n");
+            arith_uint256 hashTarget = arith_uint256().SetCompact(genesis.nBits);
+            uint256 hash;
+            genesis.nNonce = 0;
+            while (UintToArith256(genesis.GetHash()) > hashTarget)
+            {
+                ++genesis.nNonce;
+                if (genesis.nNonce == 0)
+                {
+                    ++genesis.nTime;
+                }
+            }
+            std::cout << "Genesis block found!\n";
+            std::cout << "nonce: " << genesis.nNonce << "\n";
+            std::cout << "time: " << genesis.nTime << "\n";
+            std::cout << "blockhash: " << genesis.GetHash().ToString().c_str() << "\n";
+            std::cout << "merklehash: " << genesis.hashMerkleRoot.ToString().c_str() << "\n";
+        }
+	assert(consensus.hashGenesisBlock == uint256S("{%MAINNET_GENSIS_CONSENSUS_HASH%}"));
+        assert(genesis.hashMerkleRoot == uint256S("{%MAINNET_GENSIS_MERKLE_HASH%}"));
+	    
+	    
+	    
         // Note that of those which support the service bits prefix, most only support a subset of
         // possible options.
         // This is fine at runtime as we'll fall back to using them as an addrfetch if they don't support the
@@ -201,7 +223,7 @@ public:
         m_assumed_blockchain_size = 40;
         m_assumed_chain_state_size = 2;
 
-        genesis = CreateGenesisBlock(1296688602, 414098458, 0x1d00ffff, 1, 50 * COIN);
+     	genesis = CreateGenesisBlock({%TESTNET_GENSIS_UNIX_TIMESTAMP%}, {%TESTNET_GENSIS_NONCE%}, {%TESTNET_GENSIS_NBITS%},{%TESTNET_GENSIS_COIN_AMT%});
         consensus.hashGenesisBlock = genesis.GetHash();
         // consensus.hashGenesisBlock = uint256S("0x00");
         if (true && (genesis.GetHash() != consensus.hashGenesisBlock)) {
@@ -223,8 +245,8 @@ public:
             std::cout << "blockhash: " << genesis.GetHash().ToString().c_str() << "\n";
             std::cout << "merklehash: " << genesis.hashMerkleRoot.ToString().c_str() << "\n";
         }
-        assert(consensus.hashGenesisBlock == uint256S("0x000000000933ea01ad0ee984209779baaec3ced90fa3f408719526f8d77f4943"));
-        assert(genesis.hashMerkleRoot == uint256S("0x4a5e1e4baab89f3a32518a88c31bc87f618f76673e2cc77ab2127b7afdeda33b"));
+	assert(consensus.hashGenesisBlock == uint256S("{%TESTNET_GENSIS_CONSENSUS_HASH%}"));
+        assert(genesis.hashMerkleRoot == uint256S("{%TESTNET_GENSIS_MERKLE_HASH%}"));
 
         vFixedSeeds.clear();
         vSeeds.clear();
@@ -349,7 +371,7 @@ public:
         nDefaultPort = {%signet_port%};
         nPruneAfterHeight = 1000;
 
-        genesis = CreateGenesisBlock(1598918400, 52613770, 0x1e0377ae, 1, 50 * COIN);
+       	genesis = CreateGenesisBlock({%SIGNET_GENSIS_UNIX_TIMESTAMP%}, {%SIGNET_GENSIS_NONCE%}, {%SIGNET_GENSIS_NBITS%},{%SIGNET_GENSIS_COIN_AMT%});
         consensus.hashGenesisBlock = genesis.GetHash();
         // consensus.hashGenesisBlock = uint256S("0x00");
         if (true && (genesis.GetHash() != consensus.hashGenesisBlock)) {
@@ -371,8 +393,8 @@ public:
             std::cout << "blockhash: " << genesis.GetHash().ToString().c_str() << "\n";
             std::cout << "merklehash: " << genesis.hashMerkleRoot.ToString().c_str() << "\n";
         }
-        assert(consensus.hashGenesisBlock == uint256S("0x00000008819873e925422c1ff0f99f7cc9bbb232af63a077a480a3633bee1ef6"));
-        assert(genesis.hashMerkleRoot == uint256S("0x4a5e1e4baab89f3a32518a88c31bc87f618f76673e2cc77ab2127b7afdeda33b"));
+	assert(consensus.hashGenesisBlock == uint256S("{%SIGNET_GENSIS_CONSENSUS_HASH%}"));
+        assert(genesis.hashMerkleRoot == uint256S("{%SIGNET_GENSIS_MERKLE_HASH%}"));
 
         vFixedSeeds.clear();
 
@@ -441,7 +463,7 @@ public:
 
         UpdateActivationParametersFromArgs(args);
 
-        genesis = CreateGenesisBlock(1296688602, 2, 0x207fffff, 1, 50 * COIN);
+	genesis = CreateGenesisBlock({%REGNET_GENSIS_UNIX_TIMESTAMP%}, {%REGNET_GENSIS_NONCE%}, {%REGNET_GENSIS_NBITS%},{%REGNET_GENSIS_COIN_AMT%});
         consensus.hashGenesisBlock = genesis.GetHash();
         // consensus.hashGenesisBlock = uint256S("0x00");
         if (true && (genesis.GetHash() != consensus.hashGenesisBlock)) {
@@ -463,9 +485,8 @@ public:
             std::cout << "blockhash: " << genesis.GetHash().ToString().c_str() << "\n";
             std::cout << "merklehash: " << genesis.hashMerkleRoot.ToString().c_str() << "\n";
         }
-
-        assert(consensus.hashGenesisBlock == uint256S("0x0f9188f13cb7b2c71f2a335e3a4fc328bf5beb436012afca590b1a11466e2206"));
-        assert(genesis.hashMerkleRoot == uint256S("0x4a5e1e4baab89f3a32518a88c31bc87f618f76673e2cc77ab2127b7afdeda33b"));
+	assert(consensus.hashGenesisBlock == uint256S("{%REGNET_GENSIS_CONSENSUS_HASH%}"));
+        assert(genesis.hashMerkleRoot == uint256S("{%REGNET_GENSIS_MERKLE_HASH%}"));
 
         vFixedSeeds.clear(); //!< Regtest mode doesn't have any fixed seeds.
         vSeeds.clear();      //!< Regtest mode doesn't have any DNS seeds.
