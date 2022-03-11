@@ -464,8 +464,8 @@ public:
         UpdateActivationParametersFromArgs(args);
 
 	genesis = CreateGenesisBlock({%REGNET_GENSIS_UNIX_TIMESTAMP%}, {%REGNET_GENSIS_NONCE%}, {%REGNET_GENSIS_NBITS%}, 1, {%REGNET_GENSIS_COIN_AMT%} * COIN);
-        consensus.hashGenesisBlock = genesis.GetHash();
-        // consensus.hashGenesisBlock = uint256S("0x00");
+        //consensus.hashGenesisBlock = genesis.GetHash();
+        consensus.hashGenesisBlock = uint256S("0x00");
         if (true && (genesis.GetHash() != consensus.hashGenesisBlock)) {
 		std::cout << std::string("Calculating regnet genesis block...\n");
             arith_uint256 hashTarget = arith_uint256().SetCompact(genesis.nBits);
