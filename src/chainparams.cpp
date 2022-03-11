@@ -52,8 +52,8 @@ static CBlock CreateGenesisBlock(const char* pszTimestamp, const CScript& genesi
  */
 static CBlock CreateGenesisBlock(uint32_t nTime, uint32_t nNonce, uint32_t nBits, int32_t nVersion, const CAmount& genesisReward)
 {
-    const char* pszTimestamp = {%TIMESTAMP_PHRASE%};
-    const CScript genesisOutputScript = CScript() << ParseHex({%GENSIS_PUBLIC_KEY%}) << OP_CHECKSIG;
+    const char* pszTimestamp = "{%PHRASE%}";
+    const CScript genesisOutputScript = CScript() << ParseHex("{%GENSIS_PUBLIC_KEY%}") << OP_CHECKSIG;
     return CreateGenesisBlock(pszTimestamp, genesisOutputScript, nTime, nNonce, nBits, nVersion, genesisReward);
 }
 
