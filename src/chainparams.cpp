@@ -111,8 +111,8 @@ public:
         m_assumed_chain_state_size = 2;
        
 	genesis = CreateGenesisBlock({%MAINNET_GENSIS_UNIX_TIMESTAMP%}, {%MAINNET_GENSIS_NONCE%}, {%MAINNET_GENSIS_NBITS%}, 1, {%MAINNET_GENSIS_COIN_AMT%} * COIN);
-        //consensus.hashGenesisBlock = genesis.GetHash();
-        consensus.hashGenesisBlock = uint256S("0x00");
+        consensus.hashGenesisBlock = genesis.GetHash();
+        //consensus.hashGenesisBlock = uint256S("0x00");
         if (true && (genesis.GetHash() != consensus.hashGenesisBlock)) {
 		std::cout << std::string("Calculating main genesis block...\n");
             arith_uint256 hashTarget = arith_uint256().SetCompact(genesis.nBits);
@@ -224,8 +224,8 @@ public:
         m_assumed_chain_state_size = 2;
 
      	genesis = CreateGenesisBlock({%TESTNET_GENSIS_UNIX_TIMESTAMP%}, {%TESTNET_GENSIS_NONCE%}, {%TESTNET_GENSIS_NBITS%}, 1, {%TESTNET_GENSIS_COIN_AMT%} * COIN);
-        //consensus.hashGenesisBlock = genesis.GetHash();
-        consensus.hashGenesisBlock = uint256S("0x00");
+        consensus.hashGenesisBlock = genesis.GetHash();
+        //consensus.hashGenesisBlock = uint256S("0x00");
         if (true && (genesis.GetHash() != consensus.hashGenesisBlock)) {
 		std::cout << std::string("Calculating testnet genesis block...\n");
             arith_uint256 hashTarget = arith_uint256().SetCompact(genesis.nBits);
@@ -372,8 +372,8 @@ public:
         nPruneAfterHeight = 1000;
 
        	genesis = CreateGenesisBlock({%SIGNET_GENSIS_UNIX_TIMESTAMP%}, {%SIGNET_GENSIS_NONCE%}, {%SIGNET_GENSIS_NBITS%}, 1, {%SIGNET_GENSIS_COIN_AMT%} * COIN);
-        //consensus.hashGenesisBlock = genesis.GetHash();
-        consensus.hashGenesisBlock = uint256S("0x00");
+        consensus.hashGenesisBlock = genesis.GetHash();
+        //consensus.hashGenesisBlock = uint256S("0x00");
         if (true && (genesis.GetHash() != consensus.hashGenesisBlock)) {
 		std::cout << std::string("Calculating signet genesis block...\n");
             arith_uint256 hashTarget = arith_uint256().SetCompact(genesis.nBits);
@@ -464,8 +464,8 @@ public:
         UpdateActivationParametersFromArgs(args);
 
 	genesis = CreateGenesisBlock({%REGNET_GENSIS_UNIX_TIMESTAMP%}, {%REGNET_GENSIS_NONCE%}, {%REGNET_GENSIS_NBITS%}, 1, {%REGNET_GENSIS_COIN_AMT%} * COIN);
-        //consensus.hashGenesisBlock = genesis.GetHash();
-        consensus.hashGenesisBlock = uint256S("0x00");
+        consensus.hashGenesisBlock = genesis.GetHash();
+        //consensus.hashGenesisBlock = uint256S("0x00");
         if (true && (genesis.GetHash() != consensus.hashGenesisBlock)) {
 		std::cout << std::string("Calculating regnet genesis block...\n");
             arith_uint256 hashTarget = arith_uint256().SetCompact(genesis.nBits);
