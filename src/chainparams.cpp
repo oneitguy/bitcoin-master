@@ -96,10 +96,10 @@ public:
         consensus.nMinimumChainWork = uint256S("0x00000000000000000000000000000000000000001533efd8d716a517fe2c5008");
         consensus.defaultAssumeValid = uint256S("0x0000000000000000000b9d2ec5a352ecba0592946514a92f14319dc2b367fc72"); // 654683
  
-        pchMessageStart[0] = 0xf9;
-        pchMessageStart[1] = 0xbe;
-        pchMessageStart[2] = 0xb4;
-        pchMessageStart[3] = 0xd9;
+        pchMessageStart[0] = 0x4D;
+        pchMessageStart[1] = 0x6F;
+        pchMessageStart[2] = 0x6F;
+        pchMessageStart[3] = 0x42;
         nDefaultPort = {%mainnet_port%};
         nPruneAfterHeight = 100000;
         m_assumed_blockchain_size = 2;
@@ -129,10 +129,13 @@ public:
         }
         assert(consensus.hashGenesisBlock == uint256S("0x000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f"));
         assert(genesis.hashMerkleRoot == uint256S("0x4a5e1e4baab89f3a32518a88c31bc87f618f76673e2cc77ab2127b7afdeda33b"));
-
+        
+	vFixedSeeds.clear();
+        vSeeds.clear();
         //Example    
         //vSeeds.emplace_back("seed.bitcoin.wiz.biz"); // Jason Maurice
-
+        vSeeds.emplace_back("192.168.1.26")
+        
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,0);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,5);
         base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1,128);
@@ -201,11 +204,11 @@ public:
 
         consensus.nMinimumChainWork = uint256S("0x0000000000000000000000000000000000000000000001db6ec4ac88cf2272c6");
         consensus.defaultAssumeValid = uint256S("0x000000000000006433d1efec504c53ca332b64963c425395515b01977bd7b3b0"); // 1864000
-
-        pchMessageStart[0] = 0x0b;
-        pchMessageStart[1] = 0x11;
-        pchMessageStart[2] = 0x09;
-        pchMessageStart[3] = 0x07;
+        
+	pchMessageStart[0] = 0x42;
+        pchMessageStart[1] = 0x52;
+        pchMessageStart[2] = 0x36;
+        pchMessageStart[3] = 0x6F;
         nDefaultPort = {%testnet_port%};
         nPruneAfterHeight = 1000;
         m_assumed_blockchain_size = 40;
@@ -283,6 +286,8 @@ public:
 
         if (!args.IsArgSet("-signetchallenge")) {
             bin = ParseHex("512103ad5e0edad18cb1f0fc0d28a3d4f1f3e445640337489abb10404f2d1e086be430210359ef5021964fe22d6f8e05b2463c9540ce96883fe3b278760f048f5189f2e6c452ae");
+            vFixedSeeds.clear();
+            vSeeds.clear();
             //vSeeds.emplace_back("178.128.221.177");
             //vSeeds.emplace_back("2a01:7c8:d005:390::5");
             //vSeeds.emplace_back("v7ajjeirttkbnt32wpy3c6w3emwnfr3fkla7hpxcfokr3ysd3kqtzmqd.onion:38333");
@@ -440,10 +445,10 @@ public:
         consensus.nMinimumChainWork = uint256{};
         consensus.defaultAssumeValid = uint256{};
 
-        pchMessageStart[0] = 0xfa;
-        pchMessageStart[1] = 0xbf;
-        pchMessageStart[2] = 0xb5;
-        pchMessageStart[3] = 0xda;
+        pchMessageStart[0] = 0xD4;
+        pchMessageStart[1] = 0xDA;
+        pchMessageStart[2] = 0xF2;
+        pchMessageStart[3] = 0xBF;
         nDefaultPort =  {%regnet_port%};
         nPruneAfterHeight = 1000;
         m_assumed_blockchain_size = 0;
