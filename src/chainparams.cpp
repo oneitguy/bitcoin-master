@@ -93,22 +93,22 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_TAPROOT].nTimeout = 1628640000; // August 11th, 2021
         consensus.vDeployments[Consensus::DEPLOYMENT_TAPROOT].min_activation_height = 709632; // Approximately November 12th, 2021
 
-        consensus.nMinimumChainWork = uint256S("0x00000000000000000000000000000000000000001533efd8d716a517fe2c5008");
-        consensus.defaultAssumeValid = uint256S("0x0000000000000000000b9d2ec5a352ecba0592946514a92f14319dc2b367fc72"); // 654683
+        consensus.nMinimumChainWork = uint256S("0x0");
+        consensus.defaultAssumeValid = uint256S("0x0"); // 654683
 
         /**
          * The message start string is designed to be unlikely to occur in normal data.
          * The characters are rarely used upper ASCII, not valid as UTF-8, and produce
          * a large 32-bit integer with any alignment.
          */
-        pchMessageStart[0] = 0xf9;
-        pchMessageStart[1] = 0xbe;
-        pchMessageStart[2] = 0xb4;
-        pchMessageStart[3] = 0xd9;
+        pchMessageStart[0] = 0x1f;
+        pchMessageStart[1] = 0x22;
+        pchMessageStart[2] = 0x05;
+        pchMessageStart[3] = 0x31;
         nDefaultPort = {%mainnet_port%};
         nPruneAfterHeight = 100000;
-        m_assumed_blockchain_size = 350;
-        m_assumed_chain_state_size = 6;
+        m_assumed_blockchain_size = 2;
+        m_assumed_chain_state_size = 2;
        
 	genesis = CreateGenesisBlock({%MAINNET_GENSIS_UNIX_TIMESTAMP%}, {%MAINNET_GENSIS_NONCE%}, {%MAINNET_GENSIS_NBITS%}, 1, {%MAINNET_GENSIS_COIN_AMT%} * COIN);
         //consensus.hashGenesisBlock = genesis.GetHash();
@@ -170,7 +170,7 @@ public:
             // Data from RPC: getchaintxstats 4096 0000000000000000000b9d2ec5a352ecba0592946514a92f14319dc2b367fc72
             /* nTime    */ 1603995752,
             /* nTxCount */ 582083445,
-            /* dTxRate  */ 3.508976121410527,
+            /* dTxRate  */ 0.0000002,
         };
     }
 };
